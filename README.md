@@ -1,16 +1,16 @@
-## Hi there 👋
+# Salut, moi c'est Chris 👋
 
-<!--
-**ChrisAkk/ChrisAkk** is a ✨ _special_ ✨ repository because its `README.md` (this file) appears on your GitHub profile.
+Étudiant en informatique passionné par le développement web et la construction d'applications from scratch. J'aime coder des projets qui ont du sens — des fans sites Harry Potter aux éditeurs d'image en passant par des apps web complètes.
 
-Here are some ideas to get you started:
+---
 
-- 🔭 I’m currently working on ...
-- 🌱 I’m currently learning ...
-- 👯 I’m looking to collaborate on ...
-- 🤔 I’m looking for help with ...
-- 💬 Ask me about ...
-- 📫 How to reach me: ...
-- 😄 Pronouns: ...
-- ⚡ Fun fact: ...
--->
+## 🛠️ Stack
+
+[![My Skills](https://skillicons.dev/icons?i=python,flask,js,postgresql,git)](https://skillicons.dev)
+
+---
+
+## 🚀 Projets
+
+- **[Quibbler](https://github.com/ChrisAkk/Quibbler)** — Site fan Harry Potter avec quiz, encyclopédie et cartes à collectionner *(Flask, Python, PostgreSQL)*
+- **[UVSQolor](https://github.com/ChrisAkk/UVSQolor)** — Éditeur de filtres photo desktop *(Python, Tkinter, NumPy)*
