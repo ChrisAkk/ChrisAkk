@@ -6,7 +6,7 @@
 
 ## 🛠️ Stack
 
-**Framework & Outils**
+**Framework & Tools**
 
 [![My Skills](https://skillicons.dev/icons?i=flask,postgresql,sqlite,git)](https://skillicons.dev)
 
