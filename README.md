@@ -6,7 +6,7 @@
 
 ## 🛠️ Stack
 
-[![My Skills](https://skillicons.dev/icons?i=python,flask,js,postgresql,git)](https://skillicons.dev)
+[![My Skills](https://skillicons.dev/icons?i=flask,python,js,postgresql,git)](https://skillicons.dev)
 
 ---
 
