@@ -20,7 +20,7 @@
 
 **Outils**
 
-[![My Skills](https://skillicons.dev/icons?i=postgresql,git)](https://skillicons.dev)
+[![My Skills](https://skillicons.dev/icons?i=postgresql,git)](https://skillicons.dev)![Jinja2](https://img.shields.io/badge/Jinja2-B41717?style=for-the-badge&logo=jinja&logoColor=white)
 
 ---
 
