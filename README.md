@@ -20,7 +20,7 @@
 
 **Outils**
 
-[![My Skills](https://skillicons.dev/icons?i=postgresql,git,sqlite)](https://skillicons.dev)
+[![My Skills](https://skillicons.dev/icons?i=postgresql,sqlite,git)](https://skillicons.dev)
 
 ---
 
