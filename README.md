@@ -13,5 +13,5 @@
 ## 🚀 Projets
 
 - **[Quibbler](https://github.com/ChrisAkk/Quibbler)** — Site fan Harry Potter avec quiz, encyclopédie et cartes à collectionner *(Flask, Python, PostgreSQL)*
-- **[Pendu](https://github.com/ChrisAkk/Pendu)** - Jeu du Pendu en ligne | Thèmes, difficulté et effets sonores personnalisables
+- **[Pendu](https://github.com/ChrisAkk/Pendu)** - Jeu du Pendu en ligne | Thèmes, difficulté et effets sonores personnalisables *(Flask, Python)*
 - **[UVSQolor](https://github.com/ChrisAkk/UVSQolor)** — Éditeur de filtres photo desktop *(Python, Tkinter, NumPy)*
