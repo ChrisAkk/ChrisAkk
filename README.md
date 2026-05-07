@@ -6,9 +6,9 @@
 
 ## 🛠️ Stack
 
-**Framework**
+**Framework & Outils**
 
-[![My Skills](https://skillicons.dev/icons?i=flask)](https://skillicons.dev)
+[![My Skills](https://skillicons.dev/icons?i=flask,postgresql,sqlite,git)](https://skillicons.dev)
 
 **Frontend**
 
@@ -17,10 +17,6 @@
 **Backend**
 
 [![My Skills](https://skillicons.dev/icons?i=python)](https://skillicons.dev)
-
-**Outils**
-
-[![My Skills](https://skillicons.dev/icons?i=postgresql,sqlite,git)](https://skillicons.dev)
 
 ---
 
