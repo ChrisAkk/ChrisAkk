@@ -65,7 +65,7 @@ if (backBtn) {
     })
 }
 
-window.addEventListener('mousemove', (e) => {
+function onMove(e) {
     if (isAnimating || !isClicked || !data) {
         return;
     }
@@ -86,19 +86,23 @@ window.addEventListener('mousemove', (e) => {
     } else {
         card.style.transform = `rotateX(${rotateX}deg) rotateY(${rotateY}deg)`
     }
-})
+}
 
-card.addEventListener('mousedown', () => {
-    if (isAnimating){
-        return;
-    } 
+window.addEventListener('mousemove', onMove)
+window.addEventListener('touchmove', onMove, {passive: true})
+
+function onStart() {
+    if (isAnimating) return;
 
     isClicked = true;
     card.style.transition = 'none';
     data = card.getBoundingClientRect();
-})
+}
 
-window.addEventListener('mouseup', () => {
+card.addEventListener('mousedown', onStart)
+card.addEventListener('touchstart', onStart)
+
+function onEnd() {
     isClicked = false; 
 
     card.style.transition = 'transform 0.3s cubic-bezier(0.25, 1, 0.5, 1)';
@@ -110,7 +114,10 @@ window.addEventListener('mouseup', () => {
     }
 
     data = null;
-})
+}
+
+window.addEventListener('mouseup', onEnd)
+window.addEventListener('touchend', onEnd)
 
 // bulles 
 
