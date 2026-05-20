@@ -3,9 +3,13 @@
 const btnMusic = document.querySelector('.btn-music');
 const ambianceAudio = new Audio('/sons/deepblue.mp3')
 ambianceAudio.loop = true;
-ambianceAudio.volume = 0.1;
+ambianceAudio.volume = 0.08;
+const clickSong = new Audio('/sons/click.mp3')
+clickSong.volume = 0.2;
 
 btnMusic.addEventListener('click', () => {
+    clickSong.play();
+
     if (btnMusic.innerHTML === '<i class="ri-volume-mute-line"></i>') {
         ambianceAudio.play();
         btnMusic.innerHTML = '<i class="ri-volume-up-line"></i>';
@@ -22,7 +26,7 @@ const backBtn = document.querySelector('.back-btn');
 const card = document.querySelector('.global-card');
 
 const waveMusic = new Audio('/sons/wave.mp3')
-waveMusic.volume = 0.5;
+waveMusic.volume = 0.9;
 
 let data;
 let isAnimating = false;
@@ -54,6 +58,7 @@ if (backBtn) {
         card.classList.add('unflipped');
         waveMusic.currentTime = 0;
         waveMusic.play();
+        card.style.cu
 
         isAnimating = true;
         setTimeout(() => {
@@ -64,6 +69,18 @@ if (backBtn) {
         }, 1000)
     })
 }
+
+function onStart() {
+    if (isAnimating) return;
+
+    isClicked = true;
+    document.body.classList.add('grabbed');
+    card.style.transition = 'none';
+    data = card.getBoundingClientRect();
+}
+
+card.addEventListener('mousedown', onStart)
+card.addEventListener('touchstart', onStart, {passive: true})
 
 function onMove(e) {
     if (isAnimating || !isClicked || !data) return;
@@ -92,19 +109,9 @@ function onMove(e) {
 window.addEventListener('mousemove', onMove)
 window.addEventListener('touchmove', onMove, {passive: false})
 
-function onStart() {
-    if (isAnimating) return;
-
-    isClicked = true;
-    card.style.transition = 'none';
-    data = card.getBoundingClientRect();
-}
-
-card.addEventListener('mousedown', onStart)
-card.addEventListener('touchstart', onStart, {passive: true})
-
 function onEnd() {
     isClicked = false; 
+    document.body.classList.remove('grabbed');
 
     card.style.transition = 'transform 0.3s cubic-bezier(0.25, 1, 0.5, 1)';
 
@@ -154,7 +161,7 @@ const generateur = setInterval(() => {
 
 const translation = {
     fr : {
-        title : "Étudiant full-stack | Mathématiques & Informatique",
+        title : "Étudiant full-stack | Maths & Informatique",
         btnCv : "Télécharger le CV",
         btnContact : 'Me contacter <i class="ri-arrow-turn-forward-line"></i>',
         reseaux : "Me joindre",
@@ -165,7 +172,7 @@ const translation = {
     },
 
     en : {
-        title : "Full-stack Student | Mathematics & Computer Science",
+        title : "Full-stack Student | Maths & Computer Science",
         btnCv : "Download CV",
         btnContact : 'Contact me <i class="ri-arrow-turn-forward-line"></i>',
         reseaux : "Socials",
@@ -189,6 +196,8 @@ const btnBack = document.querySelector('.back-btn');
 const txtEnd = document.querySelector('.txt-end');
 
 btnLanguage.addEventListener('click', () => {
+    clickSong.play();
+
     if (btnLanguage.dataset.lang === "en") {
         btnLanguage.dataset.lang = "fr";
 
