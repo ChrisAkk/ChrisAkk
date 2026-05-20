@@ -58,13 +58,15 @@ if (backBtn) {
         card.classList.add('unflipped');
         waveMusic.currentTime = 0;
         waveMusic.play();
-        card.style.cu
 
         isAnimating = true;
         setTimeout(() => {
             isFlipped = false;
             card.classList.remove('unflipped');
+            card.style.transition = 'none'
             card.style.transform = 'rotateX(0deg) rotateY(0deg)';
+            card.offsetHeight;
+            card.style.transition = 'transform 0.3s cubic-bezier(0.25, 1, 0.5, 1)';
             isAnimating = false;
         }, 1000)
     })
