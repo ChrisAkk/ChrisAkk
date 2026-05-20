@@ -5,7 +5,7 @@ const ambianceAudio = new Audio('/sons/deepblue.mp3')
 ambianceAudio.loop = true;
 ambianceAudio.volume = 0.08;
 const clickSong = new Audio('/sons/click.mp3')
-clickSong.volume = 0.2;
+clickSong.volume = 0.15;
 
 btnMusic.addEventListener('click', () => {
     clickSong.play();
