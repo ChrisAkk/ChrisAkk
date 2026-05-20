@@ -66,9 +66,7 @@ if (backBtn) {
 }
 
 function onMove(e) {
-    if (isAnimating || !isClicked || !data) {
-        return;
-    }
+    if (isAnimating || !isClicked || !data) return;
 
     if (!data) {
         card.style.transition = 'none';
