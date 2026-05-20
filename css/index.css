@@ -19,6 +19,7 @@ html, body {
     width: 100%;
     max-width: 100vw;
     height: 100vh;
+    height: 100dvh;
     max-height: 100vh;
     background-color: #051d24;
     background-image: url(/img/background.png);
@@ -708,32 +709,6 @@ html, body {
     100% {left: 110%; top: -10%; transform: rotate(-35deg) translateY(0px);}
 }
 
-.shark {
-    position: absolute;
-    width: 220px;
-    height: 150px;
-    background: url(/img/shark.png);
-    background-position: left;
-    background-size: cover;
-    background-repeat: no-repeat;
-    filter: blur(1px);
-    left: 110%;
-    opacity: 0.5;
-}
-
-.shark {
-    top: 96%;
-    animation: shark 18s 2.5s infinite linear;
-}
-
-@keyframes shark {
-    0% {left: 110%; transform: translateY(50px);}
-    10%{transform: translateY(0px);}
-    30%{transform: translateY(50px);}
-    40% {left: -50%; transform: translateY(0px);}
-    100% {left: -50%; transform: translateY(0px);}
-}
-
 /* phone */
 
 @media (max-width : 768px) {
@@ -751,13 +726,32 @@ html, body {
 
     .btn-language {
         position: absolute;
-        top: 60px;
+        top: 50px;
         left: -140px;
         animation: phone 2s forwards;
+        width: 40px;
+        height: 40px;
+        margin: 10px;
+        border-radius: 15px;
+        font-size: 0.9rem;
     }
 
     .txt-end {
         font-size: 12px;
+    }
+
+    .btn-music {
+        width: 40px;
+        height: 40px;
+        margin: 10px;
+        border-radius: 15px;
+        font-size: 0.9rem;
+    }
+
+    .btn-language:hover,
+    .btn-music:hover{
+        height: 40px;
+        width: 40px;
     }
 }
 
