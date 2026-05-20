@@ -17,7 +17,9 @@
 
 html, body {
     width: 100%;
+    max-width: 100vw;
     height: 100vh;
+    max-height: 100vh;
     background-color: #051d24;
     background-image: url(/img/background.png);
     background-position: center;
@@ -25,7 +27,7 @@ html, body {
     background-size: cover;
     overflow: hidden;
     overscroll-behavior: none;
-    min-height: 100dvh;
+    touch-action: none;
 }
 
 .global-container {
@@ -177,7 +179,7 @@ html, body {
     width: 200px;
     height: 50px;
 
-    background: #0d1824;
+    background: var(--secondary);
     border: 1px solid rgba(255, 255, 255, 0.1);
     color: var(--text);
     font-size: 14px;

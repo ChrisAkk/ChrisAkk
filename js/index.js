@@ -75,8 +75,11 @@ function onMove(e) {
         data = card.getBoundingClientRect();
     }
 
-    let ecartX = (e.clientX - data.left) - (data.width / 2);
-    let ecartY = (e.clientY - data.top) - (data.height / 2);
+    let clientX = e.touches ? e.touches[0].clientX : e.clientX;
+    let clientY = e.touches ? e.touches[0].clientY : e.clientY;
+
+    let ecartX = (clientX - data.left) - (data.width / 2);
+    let ecartY = (clientY - data.top) - (data.height / 2);
 
     let rotateX = -ecartY / 20;
     let rotateY = ecartX / 20;
@@ -89,7 +92,7 @@ function onMove(e) {
 }
 
 window.addEventListener('mousemove', onMove)
-window.addEventListener('touchmove', onMove, {passive: true})
+window.addEventListener('touchmove', onMove, {passive: false})
 
 function onStart() {
     if (isAnimating) return;
@@ -100,7 +103,7 @@ function onStart() {
 }
 
 card.addEventListener('mousedown', onStart)
-card.addEventListener('touchstart', onStart)
+card.addEventListener('touchstart', onStart, {passive: true})
 
 function onEnd() {
     isClicked = false; 
