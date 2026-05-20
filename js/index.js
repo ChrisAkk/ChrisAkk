@@ -33,7 +33,7 @@ let isAnimating = false;
 let isFlipped = false;
 let isClicked = false;
 
-if(turnBtn) {
+if (turnBtn) {
     turnBtn.addEventListener('click', () => {
         card.style.transform = '';
         card.classList.remove('unflipped');
@@ -82,7 +82,7 @@ function onStart() {
 }
 
 card.addEventListener('mousedown', onStart)
-card.addEventListener('touchstart', onStart, {passive: true})
+card.addEventListener('touchstart', onStart, { passive: true })
 
 function onMove(e) {
     if (isAnimating || !isClicked || !data) return;
@@ -109,10 +109,10 @@ function onMove(e) {
 }
 
 window.addEventListener('mousemove', onMove)
-window.addEventListener('touchmove', onMove, {passive: false})
+window.addEventListener('touchmove', onMove, { passive: false })
 
 function onEnd() {
-    isClicked = false; 
+    isClicked = false;
     document.body.classList.remove('grabbed');
 
     card.style.transition = 'transform 0.3s cubic-bezier(0.25, 1, 0.5, 1)';
@@ -162,26 +162,26 @@ const generateur = setInterval(() => {
 // Changement de langue 
 
 const translation = {
-    fr : {
-        title : "Étudiant full-stack | Maths & Informatique",
-        btnCv : "Télécharger le CV",
-        btnContact : 'Me contacter <i class="ri-arrow-turn-forward-line"></i>',
-        reseaux : "Me joindre",
-        contact : "Mes réseaux",
-        portfolio : '<i class="ri-user-fill"></i> Mon portfolio complet arrive très bientôt.',
-        btnBack : 'Retour <i class="ri-arrow-turn-forward-line"></i>',
-        txtEnd : "Carte Virtuelle de Chris | Portfolio à venir"
+    fr: {
+        title: "Étudiant full-stack | Maths & Informatique",
+        btnCv: "Télécharger le CV",
+        btnContact: 'Me contacter <i class="ri-arrow-turn-forward-line"></i>',
+        reseaux: "Me joindre",
+        contact: "Mes réseaux",
+        portfolio: '<i class="ri-user-fill"></i> Mon portfolio complet arrive bientôt.',
+        btnBack: 'Retour <i class="ri-arrow-turn-forward-line"></i>',
+        txtEnd: "Carte Virtuelle de Chris | Portfolio à venir"
     },
 
-    en : {
-        title : "Full-stack Student | Maths & Computer Science",
-        btnCv : "Download CV",
-        btnContact : 'Contact me <i class="ri-arrow-turn-forward-line"></i>',
-        reseaux : "Socials",
-        contact : "Contact",
-        portfolio : ' <i class="ri-user-fill"></i> Full portfolio coming very soon.',
-        btnBack : 'Flip back <i class="ri-arrow-turn-forward-line"></i>',
-        txtEnd : "Chris' Virtual Card | Portfolio coming soon"
+    en: {
+        title: "Full-stack Student | Maths & Computer Science",
+        btnCv: "Download CV",
+        btnContact: 'Contact me <i class="ri-arrow-turn-forward-line"></i>',
+        reseaux: "Socials",
+        contact: "Contact",
+        portfolio: ' <i class="ri-user-fill"></i> Full portfolio coming soon.',
+        btnBack: 'Flip back <i class="ri-arrow-turn-forward-line"></i>',
+        txtEnd: "Chris' Virtual Card | Portfolio coming soon"
     }
 }
 
@@ -246,3 +246,49 @@ btnLanguage.addEventListener('click', () => {
 
     }
 })
+
+btnCv.addEventListener('click', () => {
+    clickSong.play();
+})
+
+// bouton tools & bomb bubble
+
+const section = document.querySelectorAll('section');
+const bombeAudio = new Audio('/sons/bombe.mp3');
+const bombeAudio2 = new Audio('/sons/bombe2.mp3');
+bombeAudio.playbackRate = 2;
+bombeAudio.volume = 0.5;
+
+section.forEach(tool => {
+    tool.addEventListener('click', () => {
+        bombeAudio2.currentTime = 0;
+        bombeAudio2.play();
+
+        setTimeout(() => {
+            bombeAudio.currentTime = 0;
+            bombeAudio.play();
+        }, 1100)
+
+        let compteur2 = 0;
+
+        const generateur2 = setInterval(() => {
+            if (compteur2 >= 40) {
+                clearInterval(generateur2);
+                return;
+            }
+
+            const bombe = document.createElement('div');
+            bombe.classList.add('bombe');
+            bombe.style.left = `${Math.random() * 100}%`;
+            let indiceTaille = Math.floor(Math.random() * tailles.length);
+            bombe.style.width = tailles[indiceTaille];
+            bombe.style.height = tailles[indiceTaille];
+            aquarium.appendChild(bombe);
+            compteur2++;
+
+            setTimeout(() => {
+                bombe.remove();
+            }, 3000)
+        }, 100)
+    })
+});
