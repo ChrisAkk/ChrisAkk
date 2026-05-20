@@ -26,7 +26,7 @@ const backBtn = document.querySelector('.back-btn');
 const card = document.querySelector('.global-card');
 
 const waveMusic = new Audio('/sons/wave.mp3')
-waveMusic.volume = 0.9;
+waveMusic.volume = 1,5;
 
 let data;
 let isAnimating = false;
