@@ -272,7 +272,7 @@ section.forEach(tool => {
         let compteur2 = 0;
 
         const generateur2 = setInterval(() => {
-            if (compteur2 >= 40) {
+            if (compteur2 >= 100) {
                 clearInterval(generateur2);
                 return;
             }
@@ -289,6 +289,6 @@ section.forEach(tool => {
             setTimeout(() => {
                 bombe.remove();
             }, 3000)
-        }, 100)
+        }, 30)
     })
 });
