@@ -65,7 +65,7 @@ body {
 
 .project a{
     position: relative;
-    position: 45%;
+    width: 45%;
     transition: .3s;
     cursor: pointer;
     overflow: hidden;
