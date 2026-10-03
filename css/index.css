@@ -1,5 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Caveat+Brush&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Modern+Antiqua&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
 
 * {
     margin: 0;
@@ -31,6 +32,10 @@ html, body {
     touch-action: none;
 }
 
+/* -------------------- */
+/*         INDEX        */
+/* -------------------- */
+
 .grabbed{
     cursor: grabbing;
 }
@@ -40,9 +45,10 @@ html, body {
     height: 100%;
     perspective: 1000px;
     display: flex;
+    position: relative;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
-    position: relative;
 }
 
 .global-card {
@@ -99,108 +105,6 @@ html, body {
     z-index: -1;
 }
 
-.btn-music {
-    position: absolute;
-    top: 0;
-    left: -100px;
-    width: 50px;
-    height: 50px;
-    background: rgba(255, 255, 255, 0.05);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    margin: 20px;
-    border-radius: 20px;
-    font-size: 1rem;
-    color: var(--text);
-    cursor: pointer;
-    transition: .3s;
-    z-index: 9999;
-    animation: song 2s forwards;
-}
-
-.btn-language {
-    position: absolute;
-    top: 0px;
-    left: -100px;
-    width: 50px;
-    height: 50px;
-    background: rgba(255, 255, 255, 0.05);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    margin: 20px;
-    border-radius: 20px;
-    font-size: 1rem;
-    color: var(--text);
-    cursor: pointer;
-    transition: .3s;
-    z-index: 9999;
-    animation: language 2s forwards;
-}
-
-.btn-language,
-.btn-music {
-    cursor: pointer;
-}
-
-.btn-music:hover,
-.btn-language:hover {
-    height: 55px;
-    width: 55px;
-}
-
-@keyframes language {
-    0% {left: -70px;}
-    100% {left: 70px;}
-}
-
-@keyframes song {
-    0% {left: -140px;}
-    100% {left: 0px;}
-}
-
-.language-container {
-    position: absolute;
-    left: 50%;
-    transform: translateX(-50%);
-    top: 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.language-container .notification {
-    position: absolute;
-    top: -100px;
-
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    width: 200px;
-    height: 50px;
-
-    background: #11252d;
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    color: var(--text);
-    font-size: 14px;
-
-    border-radius: 20px;
-    animation: show 3s forwards;
-}
-
-@keyframes show {
-    0% {top: -100px;}
-    25% {top: 20px;}
-    75% {top: 20px;}
-    100% {top: -100px;}
-}
-
-.txt-end {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    margin: 20px;
-    color: rgba(255, 255, 255, 0.1);
-}
-
 /* Front */
 
 .global-card .front {
@@ -254,12 +158,12 @@ html, body {
 .tools .section-1,
 .tools .section-2 {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(4, 1fr);
     width: 90%;
     gap: 10px;
 }
 
-.tools section {
+.tools a {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -275,15 +179,11 @@ html, body {
     transition: .3s;
 }
 
-.tools section img {
-    height: 60px;
-    width: 60px;
-}
-
-.tools section i,
-.tools section p {
+.tools a i,
+.tools a p {
     color: var(--text);
     text-align: center;
+    text-decoration: none;
 }
 
 /* Section */
@@ -318,6 +218,16 @@ html, body {
     background: rgba(0, 198, 255, 0.3);
 }
 
+/* 1-4 */
+
+.tools .section-1 .section-1-4 {
+    background: rgba(45, 212, 191, 0.1);
+}
+
+.tools .section-1 .section-1-4:hover {
+    background: rgba(45, 212, 191, 0.3);
+}
+
 /* 2-1 */
 
 .tools .section-2 .section-2-1 {
@@ -346,6 +256,16 @@ html, body {
 
 .tools .section-2 .section-2-3:hover {
     background: rgba(46, 99, 130, 0.5);
+}
+
+/* 2-4 */
+
+.tools .section-2 .section-2-4 {
+    background: rgba(99, 102, 241, 0.1);
+}
+
+.tools .section-2 .section-2-4:hover {
+    background: rgba(99, 102, 241, 0.3);
 }
 
 .cv a {
@@ -501,214 +421,30 @@ html, body {
     flex-direction: column;
 }
 
-.contact p {
+.contact p,
+.contact a {
     color: var(--text);
     transition: .3s;
     font-size: 16px;
     display: flex;
     gap: 20px;
+    text-decoration: none;
 }
 
-.contact p:hover {
+.contact a:hover {
     color: var(--accent);
+    cursor: pointer;
 }
 
 .contact p i {
     color: var(--text);
 }
 
-/* Bulle */
-
-.aquarium {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    top: 0;
-    left: 0;
-    pointer-events: none;
-    z-index: -999;
-}
-
-.bulle {
-    position: absolute;
-    bottom: -10px;
-    background: rgba(255, 255, 255, 0.5);
-    animation: wave 20s infinite ease-in-out;
-    z-index: -999;
-    border-radius: 50% 40% 60% 50%;
-}
-
-@keyframes wave {
-    0% {transform: translate(0px, 0);}
-    25% {transform: translate(-15px, -27.5vh);}
-    50% {transform: translate(15px, -55vh);}
-    75% {transform: translate(-5px, -82.5vh);}
-    100% {transform: translate(0px, -110vh);}
-}
-
-.bombe{
-    position: absolute;
-    bottom: -10px;
-    background: rgba(255, 255, 255, 0.5);
-    animation: bombe 3s forwards ease-in-out;
-    z-index: -999;
-    border-radius: 50% 40% 60% 50%;
-}
-
-@keyframes bombe {
-    0% {transform: translateY(50vh);}
-    100% {transform: translateY(-110vh);}
-}
-
-/* Poissons */
-
-.fish-1a,
-.fish-1b,
-.fish-1c {
-    position: absolute;
-    width: 20px;
-    height: 10px;
-    background: url(/img/fish.png);
-    background-position: center;
-    background-size: cover;
-    border-radius: 50%;
-    filter: blur(1px);
-    left: -10%;
-}
-
-.fish-1a {
-    top: 65%;
-    animation: fishes-one 18s 0s infinite ease-in-out;
-}
-
-.fish-1b {
-    top: 70%;
-    animation: fishes-one 18s 1.2s infinite ease-in-out;
-}
-
-.fish-1c {
-    top: 75%;
-    animation: fishes-one 18s 2.5s infinite ease-in-out;
-}
-
-.fish-1a .tail,
-.fish-1b .tail,
-.fish-1c .tail {
-    position: absolute;
-    width: 10px;
-    height: 10px;
-    top: 50%;
-    transform: translateY(-50%);
-    background: url(/img/fish.png);
-    background-position: center;
-    background-size: cover;
-    left: -13px;
-    clip-path: polygon(0 0, 100% 50%, 0 100%);
-}
-
-.fish-2a,
-.fish-2b,
-.fish-2c {
-    position: absolute;
-    width: 20px;
-    height: 10px;
-    background: url(/img/fish.png);
-    background-position: center;
-    background-size: cover;
-    border-radius: 50%;
-    filter: blur(1px);
-    left: 110%;
-}
-
-.fish-2a {
-    top: 25%;
-    animation: fishes-two 22s 4s infinite ease-in-out;
-}
-
-.fish-2b {
-    top: 20%;
-    animation: fishes-two 22s 5.5s infinite ease-in-out;
-}
-
-.fish-2c {
-    top: 30%;
-    animation: fishes-two 22s 6.8s infinite ease-in-out;
-}
-
-.fish-2a .tail,
-.fish-2b .tail,
-.fish-2c .tail {
-    position: absolute;
-    width: 10px;
-    height: 10px;
-    top: 50%;
-    transform: translateY(-50%);
-    background: url(/img/fish.png);
-    background-position: center;
-    background-size: cover;
-    right: -13px;
-    clip-path: polygon(100% 0, 0 50%, 100% 100%);
-}
-
-.fish-3 {
-    position: absolute;
-    width: 25px; 
-    height: 12px;
-    background: url(/img/fish.png);
-    background-position: center;
-    background-size: cover;
-    border-radius: 50%;
-    filter: blur(1.2px);
-    left: -10%;
-    top: 110%;
-    animation: fishes-three 25s 5s infinite ease-in-out;
-}
-
-.fish-3 .tail {
-    position: absolute;
-    width: 12px;
-    height: 12px;
-    top: 50%;
-    transform: translateY(-50%);
-    background: url(/img/fish.png);
-    background-position: center;
-    background-size: cover;
-    left: -15px;
-    clip-path: polygon(0 0, 100% 50%, 0 100%);
-}
-
-@keyframes fishes-one {
-    0% {left: -10%; transform: translateY(0px);}
-    10% {transform: translateY(-15px);}
-    20% {transform: translateY(10px);}
-    30% {transform: translateY(-5px);}
-    40% {left: 110%; transform: translateY(0px);}
-    100% {left: 110%; transform: translateY(0px);}
-}
-
-@keyframes fishes-two {
-    0% {left: 110%; transform: translateY(0px);}
-    10% {transform: translateY(12px);}
-    20% {transform: translateY(-10px);}
-    30% {transform: translateY(8px);}
-    40% {left: -10%; transform: translateY(0px);}
-    100% {left: -10%; transform: translateY(0px);}
-}
-
-@keyframes fishes-three {
-    0% {left: -10%; top: 110%; transform: rotate(0deg) translateY(0px);}
-    5% {transform: rotate(-35deg) translateY(-10px);}
-    15% {transform: rotate(-35deg) translateY(15px);}
-    25% {transform: rotate(-35deg) translateY(-8px);}
-    35% {transform: rotate(-35deg) translateY(12px);}
-    45% {left: 110%; top: -10%; transform: rotate(-35deg) translateY(0px);}
-    100% {left: 110%; top: -10%; transform: rotate(-35deg) translateY(0px);}
-}
-
 /* phone */
 
 @media (max-width : 768px) {
-    .global-card {
+    .global-card,
+    .header-container {
         width: 95vw;
     }
 
@@ -716,52 +452,10 @@ html, body {
         font-size: 0.9rem;
     }
 
-    .btn-language {
-        position: absolute;
-        top: 55px;
-        left: -140px;
-        animation: phone 2s forwards;
-        width: 45px;
-        height: 45px;
-        margin: 15px;
+    .tools a {
         border-radius: 15px;
-        font-size: 0.9rem;
+        padding: 10px 5px;
+        gap: 5px;
+        font-size: 14px;
     }
-
-    .txt-end {
-        font-size: 12px;
-    }
-
-    .btn-music {
-        width: 45px;
-        height: 45px;
-        margin: 15px;
-        border-radius: 15px;
-        font-size: 0.9rem;
-    }
-
-    .btn-language:hover,
-    .btn-music:hover{
-        height: 45px;
-        width: 45px;
-    }
-
-    .language-container .notification {
-        width: 150px;
-        height: 40px;
-        border-radius: 15px;
-        animation: show-phone 3s forwards;
-    }
-}
-
-@keyframes phone {
-    0% {left: -140px;}
-    100% {left: 0px;}
-}
-
-@keyframes show-phone {
-    0% {top: -100px;}
-    25% {top: 16px;}
-    75% {top: 16px;}
-    100% {top: -100px;}
 }

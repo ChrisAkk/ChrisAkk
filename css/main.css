@@ -1,0 +1,423 @@
+@import url('https://fonts.googleapis.com/css2?family=Caveat+Brush&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Modern+Antiqua&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Modern Antiqua", serif;
+}
+
+:root {
+    --primary: #020617;
+    --secondary: #0c1d27;
+    --accent: #0d5a69;
+    --text: #f8fafc;
+}
+
+/* HEADER */
+
+.header-container{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: absolute;
+    top: 0;
+    left: 50%;
+    background: var(--secondary);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 20px;
+    margin: 20px 0px;
+    padding: 10px 15px;
+    height: 60px;
+    max-width: 510px;
+    width: 100%;
+    transform: translateX(-50%);
+    z-index: 9999999;
+}
+
+.header-container .header-name{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    text-decoration: none;
+}
+
+.header-container .header-name img{
+    width: 45px;
+    height: 45px;
+    cursor: pointer;
+    transition: .3s;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 50%;
+}
+
+.header-container .header-name p{
+    color: var(--text);
+    cursor: pointer;
+    transition: .3s;
+}
+
+.header-container .header-pages{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 40px;
+}
+
+.header-container .header-pages a{
+    color: var(--text);
+    cursor: pointer;
+    transition: .3s;
+    text-decoration: none;
+}
+
+.header-container .page{
+    border-bottom: 1px solid transparent;
+    padding-bottom: 5px;
+    padding-top: 5px;
+}
+
+.header-container .present-page{
+    border-bottom: 1px solid var(--text);
+    padding-bottom: 5px;
+    padding-top: 5px;
+    transition: .3s;
+}
+
+.header-container .present-page:hover{
+    border-bottom: 1px solid var(--accent);
+    padding-bottom: 5px;
+    padding-top: 5px;
+}
+
+.header-container .header-pages a:hover{
+    color: var(--accent);
+}
+
+.header-container .header-pages p{
+    color: var(--text);
+}
+
+.header-container .header-pages button{
+    color: var(--text);
+    background: none;
+    border: none;
+    font-size: 20px;
+    transition: .3s;
+}
+
+.header-container .header-pages button:hover{
+    color: var(--accent);
+    cursor: pointer;
+}
+
+.settings-wrapper {
+  position: relative;
+  flex-shrink: 0;
+  width: 44px;
+  height: 44px; 
+}
+
+.settings {
+  position: absolute;
+  top: 0;
+  right: 0;
+  z-index: 100;
+  display: flex;
+  flex-direction: column; 
+  align-items: center;
+  width: 44px;
+  height: 44px;
+  overflow: hidden;
+  border-radius: 999px;
+  background: var(--secondary);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  transition: height 0.45s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.settings.on {
+  height: 132px;
+}
+
+.settings-btn {
+  flex-shrink: 0;
+  width: 42px;
+  height: 42px;
+  display: grid;
+  place-items: center;
+  background: none;
+  border: none;
+  color: inherit;
+  font-size: 20px;
+  cursor: pointer;
+  transition: transform 0.45s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.settings.on .settings-btn {
+  transform: rotate(90deg);
+}
+
+.global-settings {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding: 6px 0 3px;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.15s ease;
+}
+
+.settings.on .global-settings {
+  opacity: 1;
+  pointer-events: auto;
+  transition: opacity 0.25s ease 0.15s;
+}
+
+.global-settings button {
+  flex-shrink: 0;
+  width: 36px;
+  height: 36px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  border: none;
+  background: rgba(255, 255, 255, 0.08);
+  color: inherit;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.global-settings button i {
+  font-size: 18px;
+}
+
+.global-settings button:hover {
+  background: rgba(255, 255, 255, 0.16);
+}
+
+/* Bulle */
+
+.decor{
+    position: fixed;
+    inset: 0;
+    overflow: hidden;
+    pointer-events: none;
+}
+
+.aquarium {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    pointer-events: none;
+}
+
+.bulle {
+    position: absolute;
+    bottom: -10px;
+    background: rgba(255, 255, 255, 0.5);
+    animation: wave 20s infinite ease-in-out;
+    border-radius: 50% 40% 60% 50%;
+}
+
+@keyframes wave {
+    0% {transform: translate(0px, 0);}
+    25% {transform: translate(-15px, -27.5vh);}
+    50% {transform: translate(15px, -55vh);}
+    75% {transform: translate(-5px, -82.5vh);}
+    100% {transform: translate(0px, -110vh);}
+}
+
+.bombe{
+    position: absolute;
+    bottom: -10px;
+    background: rgba(255, 255, 255, 0.5);
+    animation: bombe 3s forwards ease-in-out;
+    border-radius: 50% 40% 60% 50%;
+}
+
+@keyframes bombe {
+    0% {transform: translateY(50vh);}
+    100% {transform: translateY(-110vh);}
+}
+
+/* Poissons */
+
+.fish-1a,
+.fish-1b,
+.fish-1c {
+    position: absolute;
+    width: 20px;
+    height: 10px;
+    background: url(/img/fish.png);
+    background-position: center;
+    background-size: cover;
+    border-radius: 50%;
+    filter: blur(1px);
+    left: -10%;
+}
+
+.fish-1a {
+    top: 65%;
+    animation: fishes-one 18s 0s infinite ease-in-out;
+}
+
+.fish-1b {
+    top: 70%;
+    animation: fishes-one 18s 1.2s infinite ease-in-out;
+}
+
+.fish-1c {
+    top: 75%;
+    animation: fishes-one 18s 2.5s infinite ease-in-out;
+}
+
+.fish-1a .tail,
+.fish-1b .tail,
+.fish-1c .tail {
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: url(/img/fish.png);
+    background-position: center;
+    background-size: cover;
+    left: -13px;
+    clip-path: polygon(0 0, 100% 50%, 0 100%);
+}
+
+.fish-2a,
+.fish-2b,
+.fish-2c {
+    position: absolute;
+    width: 20px;
+    height: 10px;
+    background: url(/img/fish.png);
+    background-position: center;
+    background-size: cover;
+    border-radius: 50%;
+    filter: blur(1px);
+    left: 110%;
+}
+
+.fish-2a {
+    top: 25%;
+    animation: fishes-two 22s 4s infinite ease-in-out;
+}
+
+.fish-2b {
+    top: 20%;
+    animation: fishes-two 22s 5.5s infinite ease-in-out;
+}
+
+.fish-2c {
+    top: 30%;
+    animation: fishes-two 22s 6.8s infinite ease-in-out;
+}
+
+.fish-2a .tail,
+.fish-2b .tail,
+.fish-2c .tail {
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: url(/img/fish.png);
+    background-position: center;
+    background-size: cover;
+    right: -13px;
+    clip-path: polygon(100% 0, 0 50%, 100% 100%);
+}
+
+.fish-3 {
+    position: absolute;
+    width: 25px; 
+    height: 12px;
+    background: url(/img/fish.png);
+    background-position: center;
+    background-size: cover;
+    border-radius: 50%;
+    filter: blur(1.2px);
+    left: -10%;
+    top: 110%;
+    animation: fishes-three 25s 5s infinite ease-in-out;
+}
+
+.fish-3 .tail {
+    position: absolute;
+    width: 12px;
+    height: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: url(/img/fish.png);
+    background-position: center;
+    background-size: cover;
+    left: -15px;
+    clip-path: polygon(0 0, 100% 50%, 0 100%);
+}
+
+@keyframes fishes-one {
+    0% {left: -10%; transform: translateY(0px);}
+    10% {transform: translateY(-15px);}
+    20% {transform: translateY(10px);}
+    30% {transform: translateY(-5px);}
+    40% {left: 110%; transform: translateY(0px);}
+    100% {left: 110%; transform: translateY(0px);}
+}
+
+@keyframes fishes-two {
+    0% {left: 110%; transform: translateY(0px);}
+    10% {transform: translateY(12px);}
+    20% {transform: translateY(-10px);}
+    30% {transform: translateY(8px);}
+    40% {left: -10%; transform: translateY(0px);}
+    100% {left: -10%; transform: translateY(0px);}
+}
+
+@keyframes fishes-three {
+    0% {left: -10%; top: 110%; transform: rotate(0deg) translateY(0px);}
+    5% {transform: rotate(-35deg) translateY(-10px);}
+    15% {transform: rotate(-35deg) translateY(15px);}
+    25% {transform: rotate(-35deg) translateY(-8px);}
+    35% {transform: rotate(-35deg) translateY(12px);}
+    45% {left: 110%; top: -10%; transform: rotate(-35deg) translateY(0px);}
+    100% {left: 110%; top: -10%; transform: rotate(-35deg) translateY(0px);}
+}
+
+
+.txt-end {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    margin: 20px;
+    color: rgba(255, 255, 255, 0.1);
+}
+
+.btn-language span{
+    font-size: 16px;
+    border: none;
+}
+
+/* phone */
+
+@media (max-width : 768px) {
+    .header-container {
+        width: 95vw;
+    }
+
+    .header-container .header-pages{
+        gap: 20px;
+    }
+
+    .txt-end {
+        font-size: 12px;
+    }
+}

@@ -1,0 +1,128 @@
+@import url('https://fonts.googleapis.com/css2?family=Caveat+Brush&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Modern+Antiqua&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Modern Antiqua", serif;
+}
+
+:root {
+    --primary: #020617;
+    --secondary: #0c1d27;
+    --accent: #0d5a69;
+    --text: #f8fafc;
+}
+
+body {
+    width: 100%;
+    max-width: 100vw;
+    background-color: #041821;
+    background-image: url(/img/background.png);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-attachment: fixed;
+    overflow-x: hidden;
+    overscroll-behavior: none;
+}
+
+/* ------------------- */
+/*         AVIS        */
+/* ------------------- */
+
+.global-container {
+    perspective: 1000px;
+    width: 100%;
+    display: flex;
+    position: relative;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 120px;
+    margin-bottom: 5rem;
+    gap: 20px;
+}
+
+.avis{
+    position: relative;
+    transform-style: preserve-3d;
+    transition: transform 0.3s cubic-bezier(0.25, 1, 0.5, 1);
+    user-select: none;
+    -webkit-user-select: none;
+    cursor: grab;
+
+    background: var(--secondary);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    width: 510px;
+    height: auto;
+    border-radius: 20px;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    color: rgba(248, 250, 252, 0.7);
+}
+
+.avis .avis-decription{
+    font-family: "Roboto", sans-serif;
+}
+
+.avis .avis-name{
+    display: block;
+    align-self: flex-end;
+    font-size: 14px;
+    color: rgba(248, 250, 252, 0.9);
+}
+
+.avis .avis-name a{
+    text-decoration: none;
+    color: rgba(248, 250, 252, 0.9);
+    cursor: pointer;
+    transition: .3s;
+    text-decoration: underline;
+}
+
+.avis .avis-name a:hover{
+    color: var(--accent);
+}
+
+.separateur{
+    width: 100px;
+    height: 1px;
+    background: rgba(248, 250, 252, 0.5);
+    margin-top: 30px;
+    margin-bottom: 30px;
+}
+
+.give-review{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.give-review p{
+    font-size: 16px;
+    color: rgba(248, 250, 252, 0.7);
+}
+
+.give-review a{
+    text-decoration: none;
+    font-size: 15px;
+    display: flex;
+    gap: 10px;
+    color: rgba(248, 250, 252, 0.9);
+    padding: 15px;
+    border: 1px solid rgba(248, 250, 252, 0.9);
+    cursor: pointer;
+    transition: .3s;
+    border-radius: 15px;
+}
+
+.give-review a:hover{
+    color: var(--accent);
+    border: 1px solid var(--accent);
+}

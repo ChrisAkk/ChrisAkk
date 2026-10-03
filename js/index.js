@@ -7,22 +7,55 @@ ambianceAudio.volume = 0.08;
 const clickSong = new Audio('/sons/click.mp3')
 clickSong.volume = 0.15;
 
+let stateMusic = localStorage.getItem('music-state') || 'pause';
+let timeMusic = JSON.parse(localStorage.getItem('music-time')) || 0;
+
+window.addEventListener('pagehide', () => {
+    localStorage.setItem('music-time', ambianceAudio.currentTime);
+})
+
+if (stateMusic == 'play') {
+    ambianceAudio.currentTime = timeMusic;
+    ambianceAudio.play();
+    btnMusic.innerHTML = '<i class="ri-volume-up-line"></i>';
+}
+
 btnMusic.addEventListener('click', () => {
     clickSong.play();
 
     if (btnMusic.innerHTML === '<i class="ri-volume-mute-line"></i>') {
+        ambianceAudio.currentTime = JSON.parse(localStorage.getItem('music-time'))
         ambianceAudio.play();
         btnMusic.innerHTML = '<i class="ri-volume-up-line"></i>';
+        stateMusic = 'play'
+        localStorage.setItem('music-state', stateMusic);
     } else {
+        timeMusic = ambianceAudio.currentTime;
+        localStorage.setItem('music-time', timeMusic)
         ambianceAudio.pause();
         btnMusic.innerHTML = '<i class="ri-volume-mute-line"></i>'
+        stateMusic = 'pause';
+        localStorage.setItem('music-state', stateMusic);
     }
 })
+
+// bouton settings
+
+const settings = document.querySelector('.settings');
+const settingsBtn = document.querySelector('.settings-btn');
+
+if(settings && settingsBtn) {
+    settingsBtn.addEventListener('click', () => {
+        clickSong.play();
+        settings.classList.toggle('on');
+    })
+}
 
 // bouton tourne carte
 
 const turnBtn = document.querySelector('.turn-btn');
 const backBtn = document.querySelector('.back-btn');
+const cards = document.querySelectorAll('.global-card');
 const card = document.querySelector('.global-card');
 
 const waveMusic = new Audio('/sons/wave.mp3')
@@ -33,7 +66,7 @@ let isAnimating = false;
 let isFlipped = false;
 let isClicked = false;
 
-if (turnBtn) {
+if (turnBtn && card) {
     turnBtn.addEventListener('click', () => {
         card.style.transform = '';
         card.classList.remove('unflipped');
@@ -51,7 +84,7 @@ if (turnBtn) {
     })
 }
 
-if (backBtn) {
+if (backBtn && card) {
     backBtn.addEventListener('click', () => {
         card.style.transform = '';
         card.classList.remove('flipped');
@@ -72,24 +105,33 @@ if (backBtn) {
     })
 }
 
-function onStart() {
+let activeCard = null;
+
+function onStart(e) {
     if (isAnimating) return;
 
+    activeCard = e.currentTarget
     isClicked = true;
     document.body.classList.add('grabbed');
-    card.style.transition = 'none';
-    data = card.getBoundingClientRect();
+    activeCard.style.transition = 'none';
+    data = activeCard.getBoundingClientRect();
 }
 
-card.addEventListener('mousedown', onStart)
-card.addEventListener('touchstart', onStart, { passive: true })
+if (cards) {
+    cards.forEach((c) => {
+        c.addEventListener('mousedown', onStart)
+        c.addEventListener('touchstart', onStart, { passive: true }) 
+    })
+    
+}
 
 function onMove(e) {
     if (isAnimating || !isClicked || !data) return;
+    if (!activeCard) return;
 
     if (!data) {
-        card.style.transition = 'none';
-        data = card.getBoundingClientRect();
+        activeCard.style.transition = 'none';
+        data = activeCard.getBoundingClientRect();
     }
 
     let clientX = e.touches ? e.touches[0].clientX : e.clientX;
@@ -102,28 +144,29 @@ function onMove(e) {
     let rotateY = ecartX / 20;
 
     if (isFlipped) {
-        card.style.transform = `rotateX(${rotateX}deg) rotateY(${180 + rotateY}deg)`
+        activeCard.style.transform = `rotateX(${rotateX}deg) rotateY(${180 + rotateY}deg)`
     } else {
-        card.style.transform = `rotateX(${rotateX}deg) rotateY(${rotateY}deg)`
+        activeCard.style.transform = `rotateX(${rotateX}deg) rotateY(${rotateY}deg)`
     }
-}
+} 
 
 window.addEventListener('mousemove', onMove)
 window.addEventListener('touchmove', onMove, { passive: false })
 
-function onEnd() {
+function onEnd(e) {
     isClicked = false;
     document.body.classList.remove('grabbed');
 
-    card.style.transition = 'transform 0.3s cubic-bezier(0.25, 1, 0.5, 1)';
+    activeCard.style.transition = 'transform 0.3s cubic-bezier(0.25, 1, 0.5, 1)';
 
     if (isFlipped) {
-        card.style.transform = `rotateX(0deg) rotateY(180deg)`;
+        activeCard.style.transform = `rotateX(0deg) rotateY(180deg)`;
     } else {
-        card.style.transform = `rotateX(0deg) rotateY(0deg)`;
+        activeCard.style.transform = `rotateX(0deg) rotateY(0deg)`;
     }
 
     data = null;
+    activeCard = null;
 }
 
 window.addEventListener('mouseup', onEnd)
@@ -133,127 +176,190 @@ window.addEventListener('touchend', onEnd)
 
 const aquarium = document.querySelector('.aquarium');
 
-window.addEventListener('pageshow', (e) => {
+window.addEventListener('pageshow', () => {
     if (aquarium) {
         aquarium.innerHTML = '';
-    }
+        let tab = JSON.parse(localStorage.getItem('bulle')) || []
+        if (tab.length > 0) {
+            tab.forEach((b) => {
+                const bulle = document.createElement('div');
+                bulle.classList.add('bulle');
+                bulle.style.left = b[0];
+                bulle.style.width = b[1];
+                bulle.style.height = b[1];
+                bulle.style.animationDelay = `-${b[2]}ms`;
+                aquarium.appendChild(bulle);
+            })
+            let i = tab.length;
+            generateur(i);
+        } else {
+            generateur(0);
+        }  
+    } 
+})
+
+window.addEventListener('pagehide', () => {
+    const tabBulles = document.querySelectorAll('.bulle');
+    let tab = [];
+    tabBulles.forEach((b) => {
+        let leftBulle = b.style.left;
+        let tailleBulle = b.style.width;
+        let anim = b.getAnimations()[0];
+        let delaybulle = anim.effect.getTiming();
+        let animationBulle = anim.currentTime - delaybulle.delay;
+        tab.push([leftBulle, tailleBulle, animationBulle]);
+    })
+    localStorage.setItem('bulle', JSON.stringify(tab));
 })
 
 const tailles = ["1px", "2px", "3px", "4px", "5px"]
-let compteur = 0;
 
-const generateur = setInterval(() => {
-    if (compteur >= 50) {
-        clearInterval(generateur);
-        return;
-    }
+function generateur(i) {
+    let compteur = i;
 
-    const bulle = document.createElement('div');
-    bulle.classList.add('bulle')
-    bulle.style.left = `${Math.random() * 100}%`
-    let indice = Math.floor(Math.random() * tailles.length)
-    bulle.style.width = tailles[indice]
-    bulle.style.height = tailles[indice]
-    aquarium.appendChild(bulle)
-    compteur++;
+    const gene = setInterval(() => {
+        if (compteur >= 50) {
+            clearInterval(gene);
+            return;
+        }
 
-}, 300)
+        const bulle = document.createElement('div');
+        bulle.classList.add('bulle')
+        bulle.style.left = `${Math.random() * 100}%`
+        let indice = Math.floor(Math.random() * tailles.length)
+        bulle.style.width = tailles[indice]
+        bulle.style.height = tailles[indice]
+        aquarium.appendChild(bulle)
+        compteur++;
+
+    }, 300)
+}
+
+// Poissons 
+
+const poissons = document.querySelectorAll('.fish');
+
+window.addEventListener('pageshow', () => {
+    let tab = JSON.parse(localStorage.getItem('poissons')) || [];
+    let i = 0;
+    poissons.forEach((poisson) => {
+        poisson.style.animationDelay = `${-tab[i]}ms`
+        i++;
+    })
+})
+
+window.addEventListener('pagehide', () => {
+    let tab = [];
+    poissons.forEach((poisson) => {
+        let animPoisson = poisson.getAnimations()[0];
+        let delayPoisson = animPoisson.effect.getTiming();
+        let agePoisson = animPoisson.currentTime - delayPoisson.delay;
+        tab.push(agePoisson);
+    })
+    localStorage.setItem('poissons', JSON.stringify(tab));
+})
 
 // Changement de langue 
 
 const translation = {
     fr: {
+        // Pages 
+
         title: "Étudiant full-stack | Maths & Informatique",
         btnCv: "Télécharger le CV",
         btnContact: 'Me contacter <i class="ri-arrow-turn-forward-line"></i>',
         reseaux: "Me joindre",
         contact: "Mes réseaux",
-        portfolio: '<i class="ri-user-fill"></i> Mon portfolio complet arrive bientôt.',
+        portfolio: '<i class="ri-user-fill"></i> Portfolio complet en construction.',
         btnBack: 'Retour <i class="ri-arrow-turn-forward-line"></i>',
-        txtEnd: "Carte Virtuelle de Chris | Portfolio à venir"
+        txtEnd: "Portfolio de Chris | V2.0.0",
+        quibbler: "Plateforme fan de Harry Potter : quiz, encyclopédie, cartes à collectionner et maisons, hébergée sur mon serveur.",
+        hangman: "Un jeu du pendu en ligne : 9 thèmes, difficulté réglable, sons, clavier virtuel et historique des parties.",
+        pixora: "Un éditeur photo desktop : luminosité, contraste, flou, sépia, fusion d'images et plus.",
+        mesressources: "Site vitrine pour une hypnothérapeute, avec formulaire de contact par e-mail et slider.",
+        avis: "Avis",
+        projets : "Projets",
+        visit: 'Voir le projet <i class="ri-arrow-right-long-fill"></i>',
+        avisbtn: '<i class="ri-mail-send-line"></i> Laisser un avis',
+        avistitre: 'Vous avez travaillé avec moi ?',
+
+        // Avis
+
+        avis1: '<i class="ri-double-quotes-l"></i> Lorem ipsum, dolor sit amet consectetur adipisicing elit. Dicta exercitationem ipsa quo vero rerum amet dolores at, quidem a odit magni, ut nobis qui voluptate? Fugiat quisquam saepe repudiandae nostrum! <i class="ri-double-quotes-r"></i>'
     },
 
     en: {
+        // Pages 
+
         title: "Full-stack Student | Maths & Computer Science",
         btnCv: "Download CV",
         btnContact: 'Contact me <i class="ri-arrow-turn-forward-line"></i>',
         reseaux: "Socials",
         contact: "Contact",
-        portfolio: ' <i class="ri-user-fill"></i> Full portfolio coming soon.',
+        portfolio: ' <i class="ri-user-fill"></i> Full portfolio under construction.',
         btnBack: 'Flip back <i class="ri-arrow-turn-forward-line"></i>',
-        txtEnd: "Chris' Virtual Card | Portfolio coming soon"
+        txtEnd: "Chris' Portfolio | V2.0.0",
+        quibbler: "A Harry Potter fan platform: quizzes, encyclopedia, collectible cards and houses, self-hosted on my own server.",
+        hangman: "An online hangman game: 9 themes, adjustable difficulty, sound effects, virtual keyboard and game history.",
+        pixora: "A desktop photo editor: brightness, contrast, blur, sepia, image blending and much more.",
+        mesressources: "A showcase website for a hypnotherapist, with an email contact form and image slider.",
+        avis: "Reviews",
+        projets : "Projects",
+        visit: 'View project <i class="ri-arrow-right-long-fill"></i>',
+        avisbtn: '<i class="ri-mail-send-line"></i> Leave a review',
+        avistitre: 'Worked with me?',
+
+        // Avis
+
+        avis1: '<i class="ri-double-quotes-l"></i> Lorem ipsum, dolor sit amet consectetur adipisicing elit. Dicta exercitationem ipsa quo vero rerum amet dolores at, quidem a odit magni, ut nobis qui voluptate? Fugiat quisquam saepe repudiandae nostrum! <i class="ri-double-quotes-r"></i>'
+
     }
 }
 
-const btnLanguage = document.querySelector('.btn-language');
-const languagContainer = document.querySelector('.language-container');
-
 const txtAbout = document.querySelector('.about');
 const btnCv = document.querySelector('.btn-cv');
-const btnContact = document.querySelector('.turn-btn');
-const txtReseau = document.querySelector('.title-reseaux');
-const txtContact = document.querySelector('.title-contact');
-const txtPortfolio = document.querySelector('.txt-portfolio');
-const btnBack = document.querySelector('.back-btn');
-const txtEnd = document.querySelector('.txt-end');
 
-btnLanguage.addEventListener('click', () => {
-    clickSong.play();
+function traduire(langue) {
+    const elements = document.querySelectorAll('[data-i18n]');
+    elements.forEach((el) => {
+        const cle = el.dataset.i18n;
+        el.innerHTML = translation[langue][cle];
+    });
+}
 
-    if (btnLanguage.dataset.lang === "en") {
-        btnLanguage.dataset.lang = "fr";
+let langue = localStorage.getItem('langue') || 'en';
 
-        txtAbout.innerHTML = translation['fr']['title'];
-        btnCv.innerHTML = translation['fr']['btnCv'];
-        btnContact.innerHTML = translation['fr']['btnContact'];
-        txtReseau.innerHTML = translation['fr']['reseaux'];
-        txtContact.innerHTML = translation['fr']['contact'];
-        txtPortfolio.innerHTML = translation['fr']['portfolio'];
-        btnBack.innerHTML = translation['fr']['btnBack'];
-        txtEnd.innerHTML = translation['fr']['txtEnd'];
+traduire(langue);
 
-        const notification = document.createElement('div');
-        notification.innerHTML = "Français";
-        notification.classList.add('notification');
+const btnLangue = document.querySelector('.btn-language');
 
-        languagContainer.appendChild(notification);
+if (langue == 'fr') {
+    btnLangue.innerHTML = '<span class="fi fi-fr"></span>';
+} else {
+    btnLangue.innerHTML = '<span class="fi fi-us"></span>';
+}
 
-        notification.addEventListener('animationend', () => {
-            notification.remove();
-        })
+
+btnLangue.addEventListener('click', () => {
+    if (langue === 'en') {
+        langue = 'fr';
+        btnLangue.innerHTML = '<span class="fi fi-fr"></span>';
 
     } else {
-        btnLanguage.dataset.lang = "en";
-
-        txtAbout.innerHTML = translation['en']['title'];
-        btnCv.innerHTML = translation['en']['btnCv'];
-        btnContact.innerHTML = translation['en']['btnContact'];
-        txtReseau.innerHTML = translation['en']['reseaux'];
-        txtContact.innerHTML = translation['en']['contact'];
-        txtPortfolio.innerHTML = translation['en']['portfolio'];
-        btnBack.innerHTML = translation['en']['btnBack'];
-        txtEnd.innerHTML = translation['en']['txtEnd'];
-
-        const notification = document.createElement('div');
-        notification.innerHTML = "English";
-        notification.classList.add('notification');
-
-        languagContainer.appendChild(notification);
-
-        notification.addEventListener('animationend', () => {
-            notification.remove();
-        })
-
+        langue = 'en';
+        btnLangue.innerHTML = '<span class="fi fi-us"></span>';
     }
-})
+    traduire(langue);
+    localStorage.setItem('langue', langue);
+});
 
-btnCv.addEventListener('click', () => {
+btnCv?.addEventListener('click', () => {
     clickSong.play();
 })
 
-// bouton tools & bomb bubble
+/* bouton tools & bomb bubble
 
-const section = document.querySelectorAll('section');
+const section = document.querySelectorAll('.tool');
 const bombeAudio = new Audio('/sons/bombe.mp3');
 const bombeAudio2 = new Audio('/sons/bombe2.mp3');
 bombeAudio.playbackRate = 2;
@@ -292,3 +398,15 @@ section.forEach(tool => {
         }, 30)
     })
 });
+*/
+
+// Boutons ancre
+
+const AncreBtn = document.querySelectorAll('a');
+if(AncreBtn){
+    AncreBtn.forEach((button) => {
+        button.addEventListener('click', () => {
+            clickSong.play();
+        })
+    })
+}
