@@ -331,8 +331,16 @@ function traduire(langue) {
     });
 }
 
-let langue = localStorage.getItem('langue') || 'en';
+function trouve_langue() {
+    let f = navigator.language.slice(0, 2)
+    if (f === 'fr') {
+        return f
+    } else {
+        return 'en'
+    }
+}
 
+let langue = localStorage.getItem('langue') || trouve_langue();
 traduire(langue);
 
 const btnLangue = document.querySelector('.btn-language');
