@@ -154,6 +154,8 @@ window.addEventListener('mousemove', onMove)
 window.addEventListener('touchmove', onMove, { passive: false })
 
 function onEnd(e) {
+    if (!activeCard) return;
+    
     isClicked = false;
     document.body.classList.remove('grabbed');
 
