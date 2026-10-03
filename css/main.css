@@ -411,6 +411,7 @@
 @media (max-width : 768px) {
     .header-container {
         width: 95vw;
+        border-radius: 50px;
     }
 
     .header-container .header-pages{

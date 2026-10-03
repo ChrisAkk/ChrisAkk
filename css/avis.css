@@ -67,6 +67,8 @@ body {
 
 .avis .avis-decription{
     font-family: "Roboto", sans-serif;
+    font-style: italic;
+    line-height: 1.5;
 }
 
 .avis .avis-name{
@@ -125,4 +127,10 @@ body {
 .give-review a:hover{
     color: var(--accent);
     border: 1px solid var(--accent);
+}
+
+@media (max-width : 768px) {
+    .avis {
+        width: 95vw;
+    }
 }

@@ -272,9 +272,9 @@ const translation = {
         btnContact: 'Me contacter <i class="ri-arrow-turn-forward-line"></i>',
         reseaux: "Me joindre",
         contact: "Mes réseaux",
-        portfolio: '<i class="ri-user-fill"></i> Portfolio complet en construction.',
+        project: '<i class="ri-stack-line"></i> Voir mes projets',
         btnBack: 'Retour <i class="ri-arrow-turn-forward-line"></i>',
-        txtEnd: "Portfolio de Chris | V2.0.3",
+        txtEnd: "Portfolio de Chris | V2.2.1",
         quibbler: "Plateforme fan de Harry Potter : quiz, encyclopédie, cartes à collectionner et maisons, hébergée sur mon serveur.",
         hangman: "Un jeu du pendu en ligne : 9 thèmes, difficulté réglable, sons, clavier virtuel et historique des parties.",
         pixora: "Un éditeur photo desktop : luminosité, contraste, flou, sépia, fusion d'images et plus.",
@@ -287,7 +287,8 @@ const translation = {
 
         // Avis
 
-        avis1: '<i class="ri-double-quotes-l"></i> Lorem ipsum, dolor sit amet consectetur adipisicing elit. Dicta exercitationem ipsa quo vero rerum amet dolores at, quidem a odit magni, ut nobis qui voluptate? Fugiat quisquam saepe repudiandae nostrum! <i class="ri-double-quotes-r"></i>'
+        avis1: `<i class="ri-double-quotes-l"></i> Une excellente expérience ! Ce jeune freelance a réalisé mon site internet en faisant preuve d'un grand professionnalisme. Il a tout de suite compris mes besoins et les spécificités de mon métier pour concevoir un site élégant, intuitif et facile à utiliser. L'organisation a été irréprochable : la planification était claire et les délais ont été parfaitement respectés. Il a également été capable de m’expliquer les termes techniques simplement. À l'écoute de mes retours, il a su ajuster ses propositions au fil du projet. En plus d'être très compétent, le contact a été chaleureux et très agréable. 
+                Chris a déjà toutes les qualités d'un grand. Je le recommande sans hésiter ! <i class="ri-double-quotes-r"></i>`
     },
 
     en: {
@@ -298,9 +299,9 @@ const translation = {
         btnContact: 'Contact me <i class="ri-arrow-turn-forward-line"></i>',
         reseaux: "Socials",
         contact: "Contact",
-        portfolio: ' <i class="ri-user-fill"></i> Full portfolio under construction.',
+        project: '<i class="ri-stack-line"></i> See my projects',
         btnBack: 'Flip back <i class="ri-arrow-turn-forward-line"></i>',
-        txtEnd: "Chris' Portfolio | V2.0.3",
+        txtEnd: "Chris' Portfolio | V2.2.1",
         quibbler: "A Harry Potter fan platform: quizzes, encyclopedia, collectible cards and houses, self-hosted on my own server.",
         hangman: "An online hangman game: 9 themes, adjustable difficulty, sound effects, virtual keyboard and game history.",
         pixora: "A desktop photo editor: brightness, contrast, blur, sepia, image blending and much more.",
@@ -313,7 +314,8 @@ const translation = {
 
         // Avis
 
-        avis1: '<i class="ri-double-quotes-l"></i> Lorem ipsum, dolor sit amet consectetur adipisicing elit. Dicta exercitationem ipsa quo vero rerum amet dolores at, quidem a odit magni, ut nobis qui voluptate? Fugiat quisquam saepe repudiandae nostrum! <i class="ri-double-quotes-r"></i>'
+        avis1: `<i class="ri-double-quotes-l"></i> An excellent experience! This young freelancer built my website with great professionalism. He immediately understood my needs and the specifics of my profession, and designed an elegant, intuitive and easy-to-use site. The organization was flawless: the planning was clear and deadlines were perfectly met. He was also able to explain technical terms to me in simple words. Always attentive to my feedback, he adjusted his proposals as the project went along. On top of being highly skilled, he was warm and very pleasant to work with.
+                Chris already has all the makings of a great professional. I recommend him without hesitation! <i class="ri-double-quotes-r"></i>`
 
     }
 }
