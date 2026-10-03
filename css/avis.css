@@ -56,6 +56,7 @@ body {
     background: var(--secondary);
     border: 1px solid rgba(255, 255, 255, 0.1);
     width: 510px;
+    max-width: 510px;
     height: auto;
     border-radius: 20px;
     padding: 20px;

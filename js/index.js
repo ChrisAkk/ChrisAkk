@@ -16,7 +16,14 @@ window.addEventListener('pagehide', () => {
 
 if (stateMusic == 'play') {
     ambianceAudio.currentTime = timeMusic;
-    ambianceAudio.play();
+    ambianceAudio.play().catch(() =>{
+        const evenements = ['click', 'keydown', 'touchend'];
+        evenements.forEach((e) => {
+            document.addEventListener(e, () =>{
+                ambianceAudio.play();
+            }, { once: true })
+        })
+    });
     btnMusic.innerHTML = '<i class="ri-volume-up-line"></i>';
 }
 
@@ -274,7 +281,7 @@ const translation = {
         contact: "Mes réseaux",
         project: '<i class="ri-stack-line"></i> Voir mes projets',
         btnBack: 'Retour <i class="ri-arrow-turn-forward-line"></i>',
-        txtEnd: "Portfolio de Chris | V2.3.0",
+        txtEnd: "Portfolio de Chris | V2.3.1",
         quibbler: "Plateforme fan de Harry Potter : quiz, encyclopédie, cartes à collectionner et maisons, hébergée sur mon serveur.",
         hangman: "Un jeu du pendu en ligne : 9 thèmes, difficulté réglable, sons, clavier virtuel et historique des parties.",
         pixora: "Un éditeur photo desktop : luminosité, contraste, flou, sépia, fusion d'images et plus.",
@@ -301,7 +308,7 @@ const translation = {
         contact: "Contact",
         project: '<i class="ri-stack-line"></i> See my projects',
         btnBack: 'Flip back <i class="ri-arrow-turn-forward-line"></i>',
-        txtEnd: "Chris' Portfolio | V2.3.0",
+        txtEnd: "Chris' Portfolio | V2.3.1",
         quibbler: "A Harry Potter fan platform: quizzes, encyclopedia, collectible cards and houses, self-hosted on my own server.",
         hangman: "An online hangman game: 9 themes, adjustable difficulty, sound effects, virtual keyboard and game history.",
         pixora: "A desktop photo editor: brightness, contrast, blur, sepia, image blending and much more.",
@@ -368,49 +375,6 @@ btnLangue.addEventListener('click', () => {
 btnCv?.addEventListener('click', () => {
     clickSong.play();
 })
-
-/* bouton tools & bomb bubble
-
-const section = document.querySelectorAll('.tool');
-const bombeAudio = new Audio('/sons/bombe.mp3');
-const bombeAudio2 = new Audio('/sons/bombe2.mp3');
-bombeAudio.playbackRate = 2;
-bombeAudio.volume = 0.5;
-
-section.forEach(tool => {
-    tool.addEventListener('click', () => {
-        bombeAudio2.currentTime = 0;
-        bombeAudio2.play();
-
-        setTimeout(() => {
-            bombeAudio.currentTime = 0;
-            bombeAudio.play();
-        }, 1100)
-
-        let compteur2 = 0;
-
-        const generateur2 = setInterval(() => {
-            if (compteur2 >= 100) {
-                clearInterval(generateur2);
-                return;
-            }
-
-            const bombe = document.createElement('div');
-            bombe.classList.add('bombe');
-            bombe.style.left = `${Math.random() * 100}%`;
-            let indiceTaille = Math.floor(Math.random() * tailles.length);
-            bombe.style.width = tailles[indiceTaille];
-            bombe.style.height = tailles[indiceTaille];
-            aquarium.appendChild(bombe);
-            compteur2++;
-
-            setTimeout(() => {
-                bombe.remove();
-            }, 3000)
-        }, 30)
-    })
-});
-*/
 
 // Boutons ancre
 
