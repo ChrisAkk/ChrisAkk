@@ -158,7 +158,7 @@ html, body {
 .tools .section-1,
 .tools .section-2 {
     display: grid;
-    grid-template-columns: repeat(4, minmax(0, 1fr));
+    grid-template-columns: repeat(3, minmax(0, 1fr));
     width: 90%;
     gap: 10px;
 }
@@ -177,6 +177,7 @@ html, body {
     gap: 5px;
     cursor: pointer;
     transition: .3s;
+    text-decoration: none;
 }
 
 .tools a i,

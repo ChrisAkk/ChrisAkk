@@ -91,45 +91,6 @@ body {
     color: var(--accent);
 }
 
-.separateur{
-    width: 100px;
-    height: 1px;
-    background: rgba(248, 250, 252, 0.5);
-    margin-top: 30px;
-    margin-bottom: 30px;
-}
-
-.give-review{
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
-    gap: 20px;
-}
-
-.give-review p{
-    font-size: 16px;
-    color: rgba(248, 250, 252, 0.7);
-}
-
-.give-review a{
-    text-decoration: none;
-    font-size: 15px;
-    display: flex;
-    gap: 10px;
-    color: rgba(248, 250, 252, 0.9);
-    padding: 15px;
-    border: 1px solid rgba(248, 250, 252, 0.9);
-    cursor: pointer;
-    transition: .3s;
-    border-radius: 15px;
-}
-
-.give-review a:hover{
-    color: var(--accent);
-    border: 1px solid var(--accent);
-}
-
 @media (max-width : 768px) {
     .avis {
         width: 95vw;
